@@ -12,7 +12,7 @@
 
 - name: Install basic packages
   package:
-    name: ['vim','aptitude','bash-completion','tmux','tree','htop','wget','unzip','curl','git']
+    name: ["wget","unzip","curl","git"]
     state: present
     update_cache: yes
 
@@ -74,12 +74,4 @@
     dest: /usr/share/tomcat/conf/tomcat-users.xml
   notify: restart tomcat
 
-- name: Allow access to Manager and Host Manager apps from any IP
-  copy:
-    src: /etc/ansible/roles/tomcat/files/context.xml 
-    dest: "{{ item }}"
-  with_items:
-    - /usr/share/tomcat/webapps/host-manager/META-INF/context.xml
-    - /usr/share/tomcat/webapps/manager/META-INF/context.xml
-  notify: restart tomcat
 
